@@ -36,6 +36,7 @@ many of the chef scripts in this repo are maintained by external organizations, 
 #### Update your local submodules after modifying source or executing a `git pull`
 
 ```bash
+$ git submodule init
 $ git submodule update
 ```
 
