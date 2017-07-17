@@ -77,5 +77,8 @@ see: https://www.packer.io/docs/templates/user-variables.html
 you can override any default variables using the `-var` flag on the CLI:
 
 ```bash
-$ packer build -var-file templates/globals.json -var 'aws_instance_type=m3.xlarge' templates/base/template.json
+$ packer build \
+  -var-file templates/globals.json \
+  -var 'aws_instance_type=m3.xlarge' \
+  templates/base/template.json
 ```
