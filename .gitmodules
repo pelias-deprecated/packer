@@ -1,0 +1,33 @@
+[submodule "chef/cookbooks/nodejs"]
+	path = chef/cookbooks/nodejs
+	url = https://github.com/redguide/nodejs.git
+[submodule "chef/cookbooks/java"]
+	path = chef/cookbooks/java
+	url = https://github.com/agileorbit-cookbooks/java.git
+[submodule "chef/cookbooks/build-essential"]
+	path = chef/cookbooks/build-essential
+	url = https://github.com/chef-cookbooks/build-essential.git
+[submodule "chef/cookbooks/ark"]
+	path = chef/cookbooks/ark
+	url = https://github.com/chef-cookbooks/ark.git
+[submodule "chef/cookbooks/compat_resource"]
+	path = chef/cookbooks/compat_resource
+	url = https://github.com/chef-cookbooks/compat_resource.git
+[submodule "chef/cookbooks/seven_zip"]
+	path = chef/cookbooks/seven_zip
+	url = https://github.com/daptiv/seven_zip.git
+[submodule "chef/cookbooks/mingw"]
+	path = chef/cookbooks/mingw
+	url = https://github.com/chef-cookbooks/mingw.git
+[submodule "chef/cookbooks/windows"]
+	path = chef/cookbooks/windows
+	url = https://github.com/chef-cookbooks/windows.git
+[submodule "chef/cookbooks/ohai"]
+	path = chef/cookbooks/ohai
+	url = https://github.com/chef-cookbooks/ohai.git
+[submodule "chef/cookbooks/apt"]
+	path = chef/cookbooks/apt
+	url = https://github.com/chef-cookbooks/apt.git
+[submodule "chef/cookbooks/homebrew"]
+	path = chef/cookbooks/homebrew
+	url = https://github.com/chef-cookbooks/homebrew.git

@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "stack": "dev",
+    "aws_instance_type": "m3.large",
+    "aws_region": "",
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "ami_name": "pelias-{{user `stack`}}-base-{{timestamp}}",
+    "instance_type": "{{user `aws_instance_type`}}",
+    "ssh_username": "ubuntu",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `aws_region`}}",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "*ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "launch_block_device_mappings": [
+      {
+        "device_name": "/dev/sda1",
+        "volume_size": 20,
+        "volume_type": "gp2",
+        "delete_on_termination": true
+      }
+    ]
+  }],
+  "provisioners": [{
+    "type": "chef-solo",
+    "version": "12",
+    "roles_path": "chef/roles",
+    "cookbook_paths": ["chef/cookbooks"],
+    "run_list": [
+      "role[{{user `stack`}}_opsworks]",
+      "role[{{user `stack`}}_java]",
+      "role[{{user `stack`}}_nodejs]"
+    ]
+  }]
+}

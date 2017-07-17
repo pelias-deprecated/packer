@@ -1,0 +1,24 @@
+
+{
+  "name": "opsworks",
+  "description": "legacy opsworks configuration",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "default_attributes": {},
+  "run_list": [],
+  "override_attributes": {
+    "opsworks": {
+      "instance": {
+        "region": "{{user `aws_region`}}"
+      },
+      "layers": {
+        "dashboard": {
+          "instances": []
+        }
+      },
+      "stack": {
+        "name": "{{user `stack`}}"
+      }
+    }
+  }
+}
