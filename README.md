@@ -2,15 +2,15 @@
 
 [packer.io](https://www.packer.io) is a utility which builds automated machine images.
 
-Packer can be used to build `Amazon AMIs`, `Docker images`, `Google Cloud images`, `VirtualBox` etc... all from a single configuration.
+Packer can be used to support a variety of [builders](https://www.packer.io/docs/builders/index.html) such as `Amazon AMIs`, `Docker images`, `Google Cloud images`, `VirtualBox` etc... all from a single configuration.
 
-The utility is highly configurable and can also accept different 'provisioners' such as `chef` or `puupet` or simply `shell`.
+The utility is highly configurable and can also accept different [provisioners](https://www.packer.io/docs/provisioners/index.html) such as `chef` or `puppet` or simply `shell` scripts.
 
 ### Pelias
 
-This repo contains the configuration required to build images of the Pelias services for use in production and development environments.
+This repo contains the configuration required to build images of Pelias services, for use in production and development environments.
 
-### Installation
+### Installing Packer
 
 see: https://www.packer.io/docs/install/index.html
 
@@ -27,15 +27,6 @@ $ sudo mv packer /usr/local/bin/
 
 # packer is installed
 $ packer
-Usage: packer [--version] [--help] <command> [<args>]
-
-Available commands are:
-    build       build image(s) from template
-    fix         fixes templates from old versions of packer
-    inspect     see components of a template
-    push        push a template and supporting files to a Packer build service
-    validate    check that a template is valid
-    version     Prints the Packer version
 ```
 
 ### Working with submodules
