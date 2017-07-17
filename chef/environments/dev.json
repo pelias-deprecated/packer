@@ -1,0 +1,27 @@
+{
+  "name": "dev",
+  "description": "development environment",
+  "json_class": "Chef::Environment",
+  "chef_type": "environment",
+  "default_attributes": {
+    "java": {
+      "install_flavor": "oracle",
+      "jdk_version": "8",
+      "oracle": { "accept_oracle_download_terms": "true" },
+      "jdk": { "8": { "x86_64": {
+        "url": "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jre-8u131-linux-x64.tar.gz",
+        "checksum": "d54c1d3a095b4ff2b6607d096fa80163"
+      }}}
+    },
+    "nodejs": {
+      "install_method": "binary",
+      "version": "4.4.7",
+      "binary": { "checksum": "d4eb161e4715e11bbef816a6c577974271e2bddae9cf008744627676ff00036a" }
+    },
+    "opsworks": {
+      "stack": { "name": "dev" },
+      "instance": { "region": "{{user `aws_region`}}" },
+      "layers": { "dashboard": { "instances": [] } }
+    }
+  }
+}
