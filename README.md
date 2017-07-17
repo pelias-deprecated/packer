@@ -1,4 +1,3 @@
-
 ### Introduction
 
 [packer.io](https://www.packer.io) is a utility which builds automated machine images.
