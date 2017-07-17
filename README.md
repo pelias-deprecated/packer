@@ -54,7 +54,7 @@ you will need to create a file which holds your global build variables:
 > note: this file is ignored by git, you must enters your AWS credentials here
 
 ```bash
-$ cat templates/globals.json
+$ cat config/globals.json
 {
   "aws_region": "us-east-1",
   "aws_access_key": "",
@@ -67,7 +67,7 @@ $ cat templates/globals.json
 > note: you can specify more than one variable file, these will be auto merged before running the template
 
 ```bash
-$ packer build -var-file templates/globals.json templates/base/template.json
+$ packer build -var-file config/globals.json templates/base.json
 ```
 
 ### Overriding variables on the CLI
@@ -78,7 +78,7 @@ you can override any default variables using the `-var` flag on the CLI:
 
 ```bash
 $ packer build \
-  -var-file templates/globals.json \
+  -var-file config/globals.json \
   -var 'aws_instance_type=m3.xlarge' \
-  templates/base/template.json
+  templates/base.json
 ```
