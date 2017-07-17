@@ -1,6 +1,6 @@
 {
   "variables": {
-    "stack": "dev",
+    "chef_environment": "dev",
     "aws_instance_type": "m3.large",
     "aws_region": "",
     "aws_access_key": "",
@@ -8,7 +8,7 @@
   },
   "builders": [{
     "type": "amazon-ebs",
-    "ami_name": "pelias-{{user `stack`}}-base-{{timestamp}}",
+    "ami_name": "pelias-{{user `chef_environment`}}-base-{{timestamp}}",
     "instance_type": "{{user `aws_instance_type`}}",
     "ssh_username": "ubuntu",
     "access_key": "{{user `aws_access_key`}}",
@@ -26,7 +26,7 @@
     "launch_block_device_mappings": [
       {
         "device_name": "/dev/sda1",
-        "volume_size": 20,
+        "volume_size": 8,
         "volume_type": "gp2",
         "delete_on_termination": true
       }
@@ -36,11 +36,9 @@
     "type": "chef-solo",
     "version": "12",
     "roles_path": "chef/roles",
+    "environments_path": "chef/environments",
     "cookbook_paths": ["chef/cookbooks"],
-    "run_list": [
-      "role[{{user `stack`}}_opsworks]",
-      "role[{{user `stack`}}_java]",
-      "role[{{user `stack`}}_nodejs]"
-    ]
+    "chef_environment": "{{user `chef_environment`}}",
+    "run_list": ["role[base]"]
   }]
 }

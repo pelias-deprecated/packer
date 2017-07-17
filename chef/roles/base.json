@@ -1,0 +1,10 @@
+{
+  "name": "base",
+  "description": "install base runtime environment",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[java]",
+    "recipe[nodejs]"
+  ]
+}
