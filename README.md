@@ -46,6 +46,14 @@ $ git submodule update
 $ git submodule add https://github.com/redguide/nodejs.git chef/cookbooks/nodejs
 ```
 
+#### Lint cookbooks
+
+use `foodcritic` to display potential errors in your cookbooks:
+
+```bash
+$ foodcritic chef/cookbooks
+```
+
 #### Configuring build vars
 
 see: https://www.packer.io/docs/templates/user-variables.html
