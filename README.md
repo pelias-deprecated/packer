@@ -41,7 +41,7 @@ $ git submodule update --init --recursive
 
 #### Upgrade all submodules to the latest version
 
-``bash
+```bash
 $ git submodule foreach git pull
 ```
 
