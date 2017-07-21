@@ -39,6 +39,12 @@ many of the chef scripts in this repo are maintained by external organizations, 
 $ git submodule update --init --recursive
 ```
 
+#### Upgrade all submodules to the latest version
+
+``bash
+$ git submodule foreach git pull
+```
+
 #### Add a new submodule
 
 ```bash
