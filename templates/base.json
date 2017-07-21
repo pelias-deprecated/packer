@@ -1,19 +1,29 @@
 {
   "variables": {
     "chef_environment": "dev",
-    "aws_instance_type": "m3.large",
+    "aws_instance_type": "m3.xlarge",
     "aws_region": "",
+    "availability_zone": "",
     "aws_access_key": "",
     "aws_secret_key": ""
   },
   "builders": [{
     "type": "amazon-ebs",
+
     "ami_name": "pelias-{{user `chef_environment`}}-base-{{timestamp}}",
+    "ami_description": "pelias-{{user `chef_environment`}}-base",
+
     "instance_type": "{{user `aws_instance_type`}}",
+    "region": "{{user `aws_region`}}",
+    "availability_zone": "{{user `aws_region`}}a",
+    "ebs_optimized": "true",
+    "enhanced_networking": "true",
+    "shutdown_behavior": "terminate",
+
     "ssh_username": "ubuntu",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
-    "region": "{{user `aws_region`}}",
+
     "source_ami_filter": {
       "filters": {
         "virtualization-type": "hvm",
@@ -23,14 +33,40 @@
       "owners": ["099720109477"],
       "most_recent": true
     },
-    "launch_block_device_mappings": [
-      {
-        "device_name": "/dev/sda1",
-        "volume_size": 8,
-        "volume_type": "gp2",
-        "delete_on_termination": true
-      }
-    ]
+
+    "launch_block_device_mappings": [{
+      "device_name": "/dev/sda1",
+      "volume_size": 8,
+      "volume_type": "gp2",
+      "delete_on_termination": true
+    },{
+      "device_name": "/dev/xvdf",
+      "volume_size": 1,
+      "volume_type": "gp2",
+      "delete_on_termination": true
+    }],
+    "run_tags": {
+      "Name" : "pelias_builder",
+      "Application" : "pelias",
+      "Environment" : "{{user `chef_environment`}}"
+    },
+    "run_volume_tags": {
+      "Name" : "pelias_builder",
+      "Application" : "pelias",
+      "Environment" : "{{user `chef_environment`}}"
+    },
+
+    "ami_block_device_mappings": [{
+      "device_name": "/dev/xvdf",
+      "snapshot_id": "snap-08af2e8d7b9c4a985",
+      "volume_type": "gp2",
+      "delete_on_termination": true
+    }],
+    "tags": {
+      "Name" : "pelias_base",
+      "Application" : "pelias",
+      "Environment" : "{{user `chef_environment`}}"
+    }
   }],
   "provisioners": [{
     "type": "chef-solo",

@@ -1,0 +1,52 @@
+{
+  "variables": {
+    "chef_environment": "dev",
+    "aws_instance_type": "m3.xlarge",
+    "aws_region": "",
+    "availability_zone": "",
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebsvolume",
+    "instance_type": "{{user `aws_instance_type`}}",
+    "ssh_username": "ubuntu",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "{{user `aws_region`}}",
+    "availability_zone": "{{user `aws_region`}}a",
+    "ebs_optimized": "true",
+    "enhanced_networking": "true",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "*ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "ebs_volumes": [
+      {
+        "device_name": "/dev/xvdf",
+        "volume_size": 8,
+        "volume_type": "gp2",
+        "delete_on_termination": false,
+        "tags": {
+          "Name" : "pelias_datapack",
+          "Application" : "pelias",
+          "Environment" : "{{user `chef_environment`}}"
+        }
+      }
+    ]
+  }],
+  "provisioners": [{
+    "type": "chef-solo",
+    "version": "12",
+    "roles_path": "chef/roles",
+    "environments_path": "chef/environments",
+    "cookbook_paths": ["chef/cookbooks"],
+    "chef_environment": "{{user `chef_environment`}}",
+    "run_list": ["role[datapack]"]
+  }]
+}

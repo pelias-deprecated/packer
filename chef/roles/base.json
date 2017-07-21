@@ -4,7 +4,11 @@
   "json_class": "Chef::Role",
   "chef_type": "role",
   "run_list": [
+    "recipe[apt]",
+    "recipe[system::install_packages]",
+    "recipe[filesystem]",
+    "recipe[nodejs]",
     "recipe[java]",
-    "recipe[nodejs]"
+    "recipe[libpostal]"
   ]
 }

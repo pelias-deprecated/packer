@@ -1,0 +1,16 @@
+{
+  "name": "libpostal_volume",
+  "description": "enable data downloads for building data volumes",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[filesystem]",
+    "recipe[libpostal]"
+  ],
+  "override_attributes": {
+    "libpostal": {
+      "enable_data_download": "yes"
+    }
+  }
+}

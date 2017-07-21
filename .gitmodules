@@ -31,3 +31,21 @@
 [submodule "chef/cookbooks/homebrew"]
 	path = chef/cookbooks/homebrew
 	url = https://github.com/chef-cookbooks/homebrew.git
+[submodule "chef/cookbooks/filesystem"]
+	path = chef/cookbooks/filesystem
+	url = https://github.com/sous-chefs/filesystem.git
+[submodule "chef/cookbooks/libpostal"]
+	path = chef/cookbooks/libpostal
+	url = https://github.com/missinglink/chef-libpostal.git
+[submodule "chef/cookbooks/lvm"]
+	path = chef/cookbooks/lvm
+	url = https://github.com/chef-cookbooks/lvm.git
+[submodule "chef/cookbooks/system"]
+	path = chef/cookbooks/system
+	url = https://github.com/xhost-cookbooks/system.git
+[submodule "chef/cookbooks/cron"]
+	path = chef/cookbooks/cron
+	url = https://github.com/chef-cookbooks/cron.git
+[submodule "chef/cookbooks/hostsfile"]
+	path = chef/cookbooks/hostsfile
+	url = https://github.com/customink-webops/hostsfile.git
