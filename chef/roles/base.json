@@ -10,5 +10,10 @@
     "recipe[nodejs]",
     "recipe[java]",
     "recipe[libpostal]"
-  ]
+  ],
+  "override_attributes": {
+    "libpostal": {
+      "enable_data_download": "no"
+    }
+  }
 }

@@ -39,7 +39,6 @@
       "layers": { "dashboard": { "instances": [] } }
     },
     "libpostal": {
-      "enable_data_download": "no",
       "datadir": "/data",
       "revision": "7f7aada"
     }

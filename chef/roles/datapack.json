@@ -7,10 +7,5 @@
     "recipe[apt]",
     "recipe[filesystem]",
     "recipe[libpostal]"
-  ],
-  "override_attributes": {
-    "libpostal": {
-      "enable_data_download": "yes"
-    }
-  }
+  ]
 }
