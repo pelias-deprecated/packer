@@ -7,9 +7,10 @@
     "recipe[apt]",
     "recipe[system::install_packages]",
     "recipe[filesystem]",
+    "recipe[user::data_bag]",
+    "recipe[ulimit]",
     "recipe[nodejs]",
-    "recipe[java]",
-    "recipe[libpostal]"
+    "recipe[java]"
   ],
   "override_attributes": {
     "libpostal": {

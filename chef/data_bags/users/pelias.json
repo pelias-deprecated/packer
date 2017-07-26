@@ -1,0 +1,7 @@
+{
+  "id": "pelias",
+  "comment": "Pelias User",
+  "shell": "/bin/bash",
+  "groups": [ "sysadmin" ],
+  "ssh_keygen": false
+}

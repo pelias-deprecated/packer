@@ -49,3 +49,9 @@
 [submodule "chef/cookbooks/hostsfile"]
 	path = chef/cookbooks/hostsfile
 	url = https://github.com/customink-webops/hostsfile.git
+[submodule "chef/cookbooks/ulimit"]
+	path = chef/cookbooks/ulimit
+	url = https://github.com/bmhatfield/chef-ulimit.git
+[submodule "chef/cookbooks/user"]
+	path = chef/cookbooks/user
+	url = https://github.com/fnichol/chef-user.git
