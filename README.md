@@ -55,7 +55,7 @@ $ git submodule add https://github.com/redguide/nodejs.git chef/cookbooks/nodejs
 
 you can remove a module by [following these directions](https://davidwalsh.name/git-remove-submodule).
 
-#### Lint cookbooks
+### Lint cookbooks
 
 use `foodcritic` to display potential errors in your cookbooks:
 
@@ -63,7 +63,7 @@ use `foodcritic` to display potential errors in your cookbooks:
 $ foodcritic chef/cookbooks
 ```
 
-#### Configuring build vars
+### Configuring build vars
 
 see: https://www.packer.io/docs/templates/user-variables.html
 
