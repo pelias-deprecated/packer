@@ -19,6 +19,19 @@
         "install": ["htop"]
       }
     },
+    "users": [ "pelias" ],
+    "ulimit": {
+      "users": {
+        "ubuntu": {
+          "filehandle_limit": 65536,
+          "process_limit": 65536
+        },
+        "pelias": {
+          "filehandle_limit": 65536,
+          "process_limit": 65536
+        }
+      }
+    },
     "java": {
       "install_flavor": "oracle",
       "jdk_version": "8",
