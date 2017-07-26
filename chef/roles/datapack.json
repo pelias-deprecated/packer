@@ -1,5 +1,5 @@
 {
-  "name": "libpostal_volume",
+  "name": "datapack",
   "description": "enable data downloads for building data volumes",
   "json_class": "Chef::Role",
   "chef_type": "role",
