@@ -51,6 +51,10 @@ $ git submodule foreach git pull
 $ git submodule add https://github.com/redguide/nodejs.git chef/cookbooks/nodejs
 ```
 
+#### Remove a submodule
+
+you can remove a module by [following these directions](https://davidwalsh.name/git-remove-submodule).
+
 #### Lint cookbooks
 
 use `foodcritic` to display potential errors in your cookbooks:
