@@ -1,0 +1,24 @@
+{
+  "variables": {
+    "chef_environment": "dev"
+  },
+  "builders": [{
+    "type": "docker",
+    "image": "ubuntu:xenial",
+    "privileged": true,
+    "commit": true
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "scripts": ["scripts/docker_to_aws.sh"]
+  },{
+    "type": "chef-solo",
+    "version": "12",
+    "roles_path": "chef/roles",
+    "data_bags_path": "chef/data_bags",
+    "environments_path": "chef/environments",
+    "cookbook_paths": ["chef/cookbooks"],
+    "chef_environment": "{{user `chef_environment`}}",
+    "run_list": ["role[base]"]
+  }]
+}
