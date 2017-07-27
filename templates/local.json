@@ -4,13 +4,18 @@
   },
   "builders": [{
     "type": "docker",
-    "image": "ubuntu:xenial",
+    "image": "phusion/baseimage",
     "privileged": true,
-    "commit": true
+    "commit": true,
+    "changes": [ "CMD [\"/sbin/my_init -- bash -l\"]" ]
   }],
   "provisioners": [{
+    "type": "file",
+    "source": "scripts/docker_aws_startup.sh",
+    "destination": "/etc/my_init.d/docker_aws_startup.sh"
+  },{
     "type": "shell",
-    "scripts": ["scripts/docker_to_aws.sh"]
+    "script": "scripts/docker_aws_setup.sh"
   },{
     "type": "chef-solo",
     "version": "12",
@@ -20,5 +25,13 @@
     "cookbook_paths": ["chef/cookbooks"],
     "chef_environment": "{{user `chef_environment`}}",
     "run_list": ["role[base]"]
-  }]
+  },{
+    "type": "shell",
+    "script": "scripts/docker_aws_teardown.sh"
+  }],
+  "post-processors": [[{
+    "type": "docker-tag",
+    "repository": "pelias/base",
+    "tag": "latest"
+  }]]
 }
