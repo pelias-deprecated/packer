@@ -7,7 +7,10 @@
     "image": "phusion/baseimage",
     "privileged": true,
     "commit": true,
-    "changes": [ "ENTRYPOINT [\"/sbin/my_init\", \"--\"]" ]
+    "changes": [
+      "ENTRYPOINT [\"/sbin/my_init\", \"--\"]",
+      "CMD [\"/bin/bash\", \"-l\"]"
+    ]
   }],
   "provisioners": [{
     "type": "file",
