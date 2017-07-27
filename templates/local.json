@@ -7,7 +7,7 @@
     "image": "phusion/baseimage",
     "privileged": true,
     "commit": true,
-    "changes": [ "CMD [\"/sbin/my_init -- bash -l\"]" ]
+    "changes": [ "ENTRYPOINT [\"/sbin/my_init\", \"--\"]" ]
   }],
   "provisioners": [{
     "type": "file",
@@ -29,7 +29,10 @@
     "type": "shell",
     "script": "scripts/docker_aws_teardown.sh"
   }],
-  "post-processors": [[{
+  "post-processors": [{
+    "type": "shell-local",
+    "inline": ["docker rmi -f $(docker images -q pelias/base) || true"]
+  },[{
     "type": "docker-tag",
     "repository": "pelias/base",
     "tag": "latest"
