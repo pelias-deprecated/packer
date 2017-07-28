@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "chef_environment": "dev"
+  },
+  "builders": [{
+    "type": "docker",
+    "image": "phusion/baseimage",
+    "privileged": true,
+    "commit": true,
+    "changes": [
+      "ENTRYPOINT [\"/sbin/my_init\", \"--\"]",
+      "CMD [\"/bin/bash\", \"-l\"]"
+    ]
+  }],
+  "provisioners": [{
+    "type": "file",
+    "source": "scripts/docker_aws_startup.sh",
+    "destination": "/etc/my_init.d/docker_aws_startup.sh"
+  },{
+    "type": "shell",
+    "script": "scripts/docker_aws_setup.sh"
+  },{
+    "type": "chef-solo",
+    "version": "12",
+    "roles_path": "chef/roles",
+    "data_bags_path": "chef/data_bags",
+    "environments_path": "chef/environments",
+    "cookbook_paths": ["chef/cookbooks"],
+    "chef_environment": "{{user `chef_environment`}}",
+    "run_list": ["role[test]"]
+  },{
+    "type": "shell",
+    "script": "scripts/docker_aws_teardown.sh"
+  }],
+  "post-processors": [{
+    "type": "shell-local",
+    "inline": ["docker rmi -f $(docker images -q pelias/test) || true"]
+  },[{
+    "type": "docker-tag",
+    "repository": "pelias/test",
+    "tag": "latest"
+  }]]
+}

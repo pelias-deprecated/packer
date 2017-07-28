@@ -1,0 +1,36 @@
+{
+  "name": "base",
+  "description": "install base runtime environment",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[nodejs]",
+    "recipe[user::data_bag]",
+    "recipe[custom::dirs]",
+    "recipe[custom::repos]",
+    "recipe[custom::npm]"
+  ],
+  "override_attributes": {
+    "dirs": [{
+      "path": "/home/pelias/repos",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    }],
+    "repos": [{
+      "repository": "https://github.com/pelias/whosonfirst.git",
+      "remote": "origin",
+      "revision": "master",
+      "destination": "/home/pelias/repos/whosonfirst",
+      "user": "pelias",
+      "group": "pelias"
+    }],
+    "npm": [{
+      "command": "install --production",
+      "cwd": "/home/pelias/repos/whosonfirst",
+      "user": "pelias",
+      "group": "pelias"
+    }]
+  }
+}
