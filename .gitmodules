@@ -55,3 +55,12 @@
 [submodule "chef/cookbooks/user"]
 	path = chef/cookbooks/user
 	url = https://github.com/fnichol/chef-user.git
+[submodule "chef/cookbooks/git"]
+	path = chef/cookbooks/git
+	url = https://github.com/chef-cookbooks/git.git
+[submodule "chef/cookbooks/dmg"]
+	path = chef/cookbooks/dmg
+	url = https://github.com/chef-cookbooks/dmg.git
+[submodule "chef/cookbooks/yum-epel"]
+	path = chef/cookbooks/yum-epel
+	url = https://github.com/chef-cookbooks/yum-epel.git
