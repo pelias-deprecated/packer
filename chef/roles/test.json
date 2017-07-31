@@ -9,11 +9,17 @@
     "recipe[user::data_bag]",
     "recipe[custom::dirs]",
     "recipe[custom::repos]",
-    "recipe[custom::npm]"
+    "recipe[custom::npm]",
+    "recipe[custom::file]"
   ],
   "override_attributes": {
     "dirs": [{
       "path": "/home/pelias/repos",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    },{
+      "path": "/home/pelias/data",
       "owner": "pelias",
       "group": "pelias",
       "mode": "0755"
@@ -31,6 +37,22 @@
       "cwd": "/home/pelias/repos/whosonfirst",
       "user": "pelias",
       "group": "pelias"
+    }],
+    "file": [{
+      "format": "json",
+      "path": "/home/pelias/pelias.json",
+      "content": {
+        "imports": {
+          "whosonfirst": {
+            "datapath": "/home/pelias/data/whosonfirst",
+            "importVenues": false,
+            "importPostalcodes": false
+          }
+        }
+      },
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
     }]
   }
 }
