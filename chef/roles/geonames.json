@@ -1,0 +1,34 @@
+{
+  "name": "geonames",
+  "description": "configure repository and dependencies",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[custom::directory]",
+    "recipe[custom::repository]",
+    "recipe[custom::npm]"
+  ],
+  "override_attributes": {
+    "directory": [{
+      "path": "/home/pelias/repos",
+      "recursive": true,
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    }],
+    "repository": [{
+      "repository": "https://github.com/pelias/geonames.git",
+      "remote": "origin",
+      "revision": "master",
+      "destination": "/home/pelias/repos/geonames",
+      "user": "pelias",
+      "group": "pelias"
+    }],
+    "npm": [{
+      "command": "install --production",
+      "cwd": "/home/pelias/repos/geonames",
+      "user": "pelias",
+      "group": "pelias"
+    }]
+  }
+}

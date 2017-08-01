@@ -4,9 +4,9 @@
 #
 
 ################################################################################
-# create directories listed in the 'dirs' attribute
+# create directories listed in the 'directory' attribute
 
-Array(node['dirs']).each do |dir|
+Array(node['directory']).each do |dir|
   directory(dir['path']) do
     group       dir['group']        if dir['group']
     inherits    dir['inherits']     if dir['inherits']

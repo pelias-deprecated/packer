@@ -1,58 +1,72 @@
 {
-  "name": "base",
-  "description": "install base runtime environment",
+  "name": "test",
+  "description": "test environment",
   "json_class": "Chef::Role",
   "chef_type": "role",
   "run_list": [
     "recipe[apt]",
+    "recipe[system::install_packages]",
     "recipe[nodejs]",
+    "recipe[filesystem]",
     "recipe[user::data_bag]",
-    "recipe[custom::dirs]",
-    "recipe[custom::repos]",
-    "recipe[custom::npm]",
-    "recipe[custom::file]"
+    "recipe[custom::file]",
+    "role[whosonfirst]",
+    "role[whosonfirst_data]",
+    "role[openaddresses]",
+    "role[openaddresses_data]",
+    "role[openstreetmap]",
+    "role[openstreetmap_data]",
+    "recipe[custom::osmupdate]",
+    "role[geonames]",
+    "role[geonames_data]"
   ],
   "override_attributes": {
-    "dirs": [{
-      "path": "/home/pelias/repos",
-      "owner": "pelias",
-      "group": "pelias",
-      "mode": "0755"
-    },{
-      "path": "/home/pelias/data",
-      "owner": "pelias",
-      "group": "pelias",
-      "mode": "0755"
-    }],
-    "repos": [{
-      "repository": "https://github.com/pelias/whosonfirst.git",
-      "remote": "origin",
-      "revision": "master",
-      "destination": "/home/pelias/repos/whosonfirst",
-      "user": "pelias",
-      "group": "pelias"
-    }],
-    "npm": [{
-      "command": "install --production",
-      "cwd": "/home/pelias/repos/whosonfirst",
-      "user": "pelias",
-      "group": "pelias"
-    }],
     "file": [{
-      "format": "json",
       "path": "/home/pelias/pelias.json",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755",
+      "format": "json",
       "content": {
         "imports": {
           "whosonfirst": {
-            "datapath": "/home/pelias/data/whosonfirst",
+            "datapath": "/data/whosonfirst",
             "importVenues": false,
-            "importPostalcodes": false
+            "importPostalcodes": false,
+            "importPlace": "85632605",
+            "api_key": "mapzen-ry6wrsG"
+          },
+          "openaddresses": {
+            "datapath": "/data/openaddresses",
+            "files": [ "sg/countrywide.csv" ]
+          },
+          "openstreetmap": {
+            "leveldbpath": "/tmp",
+            "datapath": "/data/openstreetmap",
+            "download": [{
+              "sourceURL": "https://s3.amazonaws.com/metro-extracts.mapzen.com/singapore.osm.pbf"
+            }],
+            "import": [{
+              "type": { "node": "osmnode", "way": "osmway" },
+              "filename": "singapore.osm.pbf"
+            }]
+          },
+          "polyline": {
+            "datapath": "/data/polyline",
+            "files": [ "extract.0sv" ]
+          },
+          "geonames": {
+            "datapath": "/data/geonames",
+            "countryCode": "SG"
           }
         }
-      },
-      "owner": "pelias",
-      "group": "pelias",
-      "mode": "0755"
+      }
+    }],
+    "osmupdate": [{
+      "cwd": "/data/openstreetmap",
+      "filename": "singapore.osm.pbf",
+      "user": "pelias",
+      "group": "pelias"
     }]
   }
 }

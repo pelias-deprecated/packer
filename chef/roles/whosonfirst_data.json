@@ -1,0 +1,28 @@
+{
+  "name": "whosonfirst_data",
+  "description": "download data",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[custom::directory]",
+    "recipe[custom::npm]"
+  ],
+  "override_attributes": {
+    "directory": [{
+      "path": "/data/whosonfirst",
+      "recursive": true,
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    }],
+    "npm": [{
+      "command": "run download",
+      "cwd": "/home/pelias/repos/whosonfirst",
+      "user": "pelias",
+      "group": "pelias",
+      "environment": {
+        "PELIAS_CONFIG": "/home/pelias/pelias.json"
+      }
+    }]
+  }
+}

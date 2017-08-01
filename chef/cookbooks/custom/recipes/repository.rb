@@ -8,7 +8,7 @@ include_recipe 'git'
 ################################################################################
 # clone git repositories listed in the 'repos' attribute
 
-Array(node['repos']).each do |repo|
+Array(node['repository']).each do |repo|
   git(repo['destination']) do
     additional_remotes    repo['additional_remotes']  if repo['additional_remotes']
     checkout_branch       repo['checkout_branch']     if repo['checkout_branch']

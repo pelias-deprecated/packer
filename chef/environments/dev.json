@@ -16,7 +16,7 @@
     },
     "system": {
       "packages": {
-        "install": ["htop"]
+        "install": [ "unzip", "htop", "tree", "osmctools" ]
       }
     },
     "users": [ "pelias" ],

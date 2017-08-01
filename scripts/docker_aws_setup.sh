@@ -27,9 +27,9 @@ useradd -ms /bin/bash ubuntu
 # create virtual block devices inside the docker container
 # -----------------------------------------------------------------------------
 
-# create a 1M file in /opt/volume.img if one has not already been bind-mounted
+# create a 100M file in /opt/volume.img if one has not already been bind-mounted
 if [ ! -f /opt/volume.img ]; then
-  dd if=/dev/zero of=/opt/volume.img bs=1M count=1
+  dd if=/dev/zero of=/opt/volume.img bs=500M count=1
   chmod 777 /opt/volume.img
 fi
 
@@ -38,14 +38,18 @@ fi
 
 # creating more loop devices seems to fix the intermittent failure issue...
 for i in {8..63}; do
-  if [ -e /dev/loop$i ]; then continue; fi;
+  if [ -e /dev/loop$i ]; then rm /dev/loop$i; fi;
   mknod /dev/loop$i b 7 $i;
   chown --reference=/dev/loop0 /dev/loop$i;
   chmod --reference=/dev/loop0 /dev/loop$i;
 done
 
+# bind to an available loop device
+LOOPDEV=$(losetup -f /opt/volume.img -P --show)
+echo "using loop device: ${LOOPDEV}"
+
 # create a hard link from the attached /dev/loop* device to /dev/xvdf
-ln $(losetup -f /opt/volume.img -P --show) /dev/xvdf
+ln ${LOOPDEV} /dev/xvdf
 
 # -----------------------------------------------------------------------------
 # configure startup scripts

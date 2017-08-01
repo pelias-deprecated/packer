@@ -1,0 +1,26 @@
+{
+  "name": "polyline_data",
+  "description": "download data",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[custom::directory]",
+    "recipe[custom::download]"
+  ],
+  "override_attributes": {
+    "directory": [{
+      "path": "/data/polyline",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755",
+      "recursive": true
+    }],
+    "download": [{
+      "path": "/data/polyline/extract.0sv",
+      "source": "http://pelias-data.s3.amazonaws.com/poylines/singapore.gz",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    }]
+  }
+}

@@ -5,7 +5,68 @@
   "chef_type": "role",
   "run_list": [
     "recipe[apt]",
+    "recipe[system::install_packages]",
+    "recipe[nodejs]",
     "recipe[filesystem]",
-    "recipe[libpostal]"
-  ]
+    "recipe[user::data_bag]",
+    "recipe[custom::file]",
+    "role[whosonfirst]",
+    "role[whosonfirst_data]",
+    "role[openaddresses]",
+    "role[openaddresses_data]",
+    "role[openstreetmap]",
+    "role[openstreetmap_data]",
+    "recipe[custom::osmupdate]",
+    "role[geonames]",
+    "role[geonames_data]"
+  ],
+  "override_attributes": {
+    "file": [{
+      "path": "/home/pelias/pelias.json",
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755",
+      "format": "json",
+      "content": {
+        "imports": {
+          "whosonfirst": {
+            "datapath": "/data/whosonfirst",
+            "importVenues": true,
+            "importPostalcodes": true,
+            "importPlace": "",
+            "api_key": ""
+          },
+          "openaddresses": {
+            "datapath": "/data/openaddresses",
+            "files": []
+          },
+          "openstreetmap": {
+            "leveldbpath": "/tmp",
+            "datapath": "/data/openstreetmap",
+            "download": [{
+              "sourceURL": "https://s3.amazonaws.com/metro-extracts.mapzen.com/singapore.osm.pbf"
+            }],
+            "import": [{
+              "type": { "node": "osmnode", "way": "osmway" },
+              "filename": "extract.osm.pbf"
+            }]
+          },
+          "polyline": {
+            "datapath": "/data/polyline",
+            "files": [ "extract.0sv" ]
+          },
+          "geonames": {
+            "datapath": "/data/geonames",
+            "countryCode": "SG"
+          }
+        }
+      }
+    }],
+    "osmupdate": [{
+      "cwd": "/data/openstreetmap",
+      "filename": "planet.osm.pbf",
+      "user": "pelias",
+      "group": "pelias"
+    }]
+  }
 }
