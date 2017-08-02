@@ -1,0 +1,34 @@
+{
+  "name": "interpolation",
+  "description": "configure repository and dependencies",
+  "json_class": "Chef::Role",
+  "chef_type": "role",
+  "run_list": [
+    "recipe[custom::directory]",
+    "recipe[custom::repository]",
+    "recipe[custom::npm]"
+  ],
+  "override_attributes": {
+    "directory": [{
+      "path": "/home/pelias/repos",
+      "recursive": true,
+      "owner": "pelias",
+      "group": "pelias",
+      "mode": "0755"
+    }],
+    "repository": [{
+      "repository": "https://github.com/pelias/interpolation.git",
+      "remote": "origin",
+      "revision": "filtered-download",
+      "destination": "/home/pelias/repos/interpolation",
+      "user": "pelias",
+      "group": "pelias"
+    }],
+    "npm": [{
+      "command": "install",
+      "cwd": "/home/pelias/repos/interpolation",
+      "user": "pelias",
+      "group": "pelias"
+    }]
+  }
+}

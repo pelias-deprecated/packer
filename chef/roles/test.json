@@ -18,7 +18,9 @@
     "role[openstreetmap_data]",
     "recipe[custom::osmupdate]",
     "role[geonames]",
-    "role[geonames_data]"
+    "role[geonames_data]",
+    "role[interpolation]",
+    "role[tiger_data]"
   ],
   "override_attributes": {
     "file": [{
@@ -54,6 +56,16 @@
           "polyline": {
             "datapath": "/data/polyline",
             "files": [ "extract.0sv" ]
+          },
+          "interpolation": {
+            "download": {
+              "tiger": {
+                "datapath": "/data/tiger",
+                "states": [{
+                  "state_code": 41
+                }]
+              }
+            }
           },
           "geonames": {
             "datapath": "/data/geonames",
