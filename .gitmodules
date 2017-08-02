@@ -34,9 +34,6 @@
 [submodule "chef/cookbooks/filesystem"]
 	path = chef/cookbooks/filesystem
 	url = https://github.com/sous-chefs/filesystem.git
-[submodule "chef/cookbooks/libpostal"]
-	path = chef/cookbooks/libpostal
-	url = https://github.com/missinglink/chef-libpostal.git
 [submodule "chef/cookbooks/lvm"]
 	path = chef/cookbooks/lvm
 	url = https://github.com/chef-cookbooks/lvm.git
@@ -64,3 +61,6 @@
 [submodule "chef/cookbooks/yum-epel"]
 	path = chef/cookbooks/yum-epel
 	url = https://github.com/chef-cookbooks/yum-epel.git
+[submodule "chef/cookbooks/libpostal"]
+	path = chef/cookbooks/libpostal
+	url = https://github.com/mapzen/libpostal.git
